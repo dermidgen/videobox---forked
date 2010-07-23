@@ -48,13 +48,13 @@ var Videobox = {
      		return this.open (link.href, link.title, link.rel);
 
 	},
-	open: function(sLinkHref, sLinkTitle, sLinkRel) {
+	open: function(sLinkHref, sLinkTitle, sLinkRel, oFlashVars) {
 		this.href = sLinkHref;
 		this.title = sLinkTitle;
 		this.rel = sLinkRel;
 		this.position();
 		this.setup();
-		this.video(this.href);
+		this.video(this.href, oFlashVars);
 		this.top = Window.getScrollTop() + (Window.getHeight() / 15);
 		this.center.setStyles({top: this.top+'px', display: ''});
 		this.fx.overlay.start(0.8);
@@ -75,7 +75,7 @@ var Videobox = {
     this.overlay.setStyles({'top': window.getScrollTop()+'px', 'height': window.getHeight()+'px'});
 	},
 
-	video: function(sLinkHref){
+	video: function(sLinkHref, oFlashVars){
 		if (sLinkHref.match(/youtube\.com\/watch/i)) {
       this.flash = true;
 			var hRef = sLinkHref;
@@ -128,7 +128,7 @@ var Videobox = {
 		else {
 		  this.flash = true;
 			this.videoID = sLinkHref;
-			this.so = new SWFObject(this.videoID, "flvvideo", this.options.contentsWidth, this.options.contentsHeight, "0");
+			this.so = new SWFObject(this.videoID, "flvvideo", this.options.contentsWidth, this.options.contentsHeight, "0", "", oFlashVars);
 		}
 	},
 
